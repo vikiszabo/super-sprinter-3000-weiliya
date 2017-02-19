@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+{% if story %}
+    {% set title="- Edit Story" %}
+{% else %}
+    {% set title="- Add New Story" %}
+{% endif %}
+{% block title %}
+    {{ title }}
+{% endblock %}
+{% block content %}
+    <h3>User Story Manager {{ title }}</h3>
+    <form method="POST">
+        <div class="row">
+            <div class="form-group col-xs-12">
+                <label for="title">Story Title</label>
+                <input class="form-control" id="title" name="title" value="{{ story.title }}">
+            </div>
+            <div class="form-group col-xs-12">
+                <label for="description">User Story</label>
+                <textarea class="form-control" id="description" name="description" rows="5">{{ story.description }}</textarea>
+            </div>
+            <div class="form-group col-xs-12">
+                <label for="criteria">Acceptance Criteria</label>
+                <textarea class="form-control" id="criteria" name="criteria" rows="6">{{ story.criteria }}</textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-xs-2">
+                <label for="business_value">Business Value</label>
+                <input class="form-control" type="number" min="100" max="1500" step="100" id="business_value"
+                       name="business_value" value="{{ story.business_value }}">
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-xs-2">
+                <label for="estimation">Estimation</label>
+                <input class="form-control" type="number" min="0.5" max="40" step="0.5" id="estimation"
+                       name="estimation" value="{{ story.estimation }}">
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-xs-3">
+                <label for="status">Status</label>
+                <select class="form-control" id="status" name="status">
+                    {% for status in statuses %}
+                        <option value="{{ status.id }}"
+                                {% if story.status and story.status.id==status.id %} selected="selected"{% endif %}
+                        >
+                            {{ status.name }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <input class="form-control btn-primary" type="submit"
+                   value="{% if story %}Update {% else %}Create {% endif %}">
+        </div>
+        <a href="{{ url_for('show_list') }}">Back to list</a>
+    </form>
+{% endblock %}

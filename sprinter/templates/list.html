@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h3>User Story Manager</h3>
+    <a class="btn btn-primary" href="{{ url_for('show_add_form') }}">Add new User Story</a>
+    <br/>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <td>ID</td>
+            <td>Story Title</td>
+            <td>User Story</td>
+            <td>Acceptance Criteria</td>
+            <td>Business Value</td>
+            <td>Estimation</td>
+            <td>Status</td>
+            <td>Actions</td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for story in stories %}
+            <tr>
+                <td><a{{ story.id }}</td>
+                <td>{{ story.title }}</td>
+                <td>{{ story.description }}</td>
+                <td>{{ story.criteria }}</td>
+                <td>{{ story.business_value }}</td>
+                <td>{{ story.estimation }}</td>
+                <td>{{ story.status.name }}</td>
+                <td>
+                    <a class="btn btn-primary btn-sm" href="{{ url_for('show_edit_form', story_id=story.id) }}">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </a>
+                    <a class="btn btn-danger btn-sm" href="{{ url_for('delete_story', story_id=story.id) }}">
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
