@@ -42,20 +42,22 @@
             <div class="form-group col-xs-3">
                 <label for="status">Status</label>
                 <select class="form-control" id="status" name="status">
-                    {% for status in statuses %}
-                        <option value="{{ status.id }}"
-                                {% if story.status and story.status.id==status.id %} selected="selected"{% endif %}
+                    {% for status_value in statuses %}
+                        <option value="{{ status_value.name }}"
+                                {% if story.status and story.status==status_value.name %} selected="selected"{% endif %}
                         >
-                            {{ status.name }}
+                            {{ status_value.name }}
                         </option>
                     {% endfor %}
                 </select>
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group col-xs-2">
             <input class="form-control btn-primary" type="submit"
                    value="{% if story %}Update {% else %}Create {% endif %}">
         </div>
-        <a href="{{ url_for('show_list') }}">Back to list</a>
+        <div class="pull-right">
+            <a href="{{ url_for('show_list') }}">Back to list</a>    
+        </div>
     </form>
 {% endblock %}

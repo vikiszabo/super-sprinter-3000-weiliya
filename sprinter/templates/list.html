@@ -19,13 +19,13 @@
         <tbody>
         {% for story in stories %}
             <tr>
-                <td><a{{ story.id }}</td>
+                <td>{{ story.id }}</td>
                 <td>{{ story.title }}</td>
                 <td>{{ story.description }}</td>
                 <td>{{ story.criteria }}</td>
                 <td>{{ story.business_value }}</td>
                 <td>{{ story.estimation }}</td>
-                <td>{{ story.status.name }}</td>
+                <td>{{ story.status }}</td>
                 <td>
                     <a class="btn btn-primary btn-sm" href="{{ url_for('show_edit_form', story_id=story.id) }}">
                         <span class="glyphicon glyphicon-pencil"></span>

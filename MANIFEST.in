@@ -1,4 +1,3 @@
 graft sprinter/templates
 graft sprinter/static
-include sprinter/connectdatabase.py
-include sprinter/models.py
+include sprinter/data_handler.py
