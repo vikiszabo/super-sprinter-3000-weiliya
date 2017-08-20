@@ -13,7 +13,6 @@ app = Flask(__name__)
 @app.route('/story', methods=['GET'])
 def show_add_form():
     statuses = Status.select()
-
     return render_template("form.html", statuses=statuses, story={})
 
 
@@ -42,21 +41,21 @@ def show_edit_form(story_id):
 
 @app.route('/story/<story_id>', methods=['POST'])
 def show_update_form(story_id):
-    story=UserStory.get(id=story_id)
-    story.title=request.form['title']
-    story.description=request.form['description']
-    story.criteria=request.form['criteria']
-    story.business_value=request.form['business_value']
-    story.estimation=request.form['estimation']
-    story.status=request.form['status']
+    story = UserStory.get(id=story_id)
+    story.title = request.form['title']
+    story.description = request.form['description']
+    story.criteria = request.form['criteria']
+    story.business_value = request.form['business_value']
+    story.estimation = request.form['estimation']
+    story.status = request.form['status']
     story.save()
 
-    return  redirect(url_for("show_list"))
+    return redirect(url_for("show_list"))
 
 
 @app.route('/story/<story_id>/delete', methods=['GET'])
 def delete_story(story_id):
-    story=UserStory.get(id=story_id)
+    story = UserStory.get(id=story_id)
     story.delete_instance()
 
     return redirect(url_for("show_list"))
@@ -66,7 +65,7 @@ def delete_story(story_id):
 @app.route('/list')
 def show_list():
     stories = UserStory.select()
-
+    #stories = read_stroy_from_file(erp)
     return render_template("list.html", stories=stories)
 
 
